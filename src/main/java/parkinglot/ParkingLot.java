@@ -5,17 +5,23 @@ import java.util.Map;
 
 public class ParkingLot {
 	private final int space;
+	private String name;
 	protected Map<Ticket, Car> parkedCars = new HashMap<Ticket, Car>();
 
-	public ParkingLot(int space) {
+	public ParkingLot(String name, int space) {
+		this.name = name;
 		this.space = space;
 	}
 	
+	public String getName() {
+		return name;
+	}
+
 	public Ticket park(Car car) throws ParkingLotIsFullException {
 		if (!isNotFull()) {
 			throw new ParkingLotIsFullException();
 		}
-		Ticket ticket = new Ticket();
+		Ticket ticket = new Ticket(this);
 		parkedCars.put(ticket, car);
 		return ticket;
 	}

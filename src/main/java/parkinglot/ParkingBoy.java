@@ -2,30 +2,30 @@ package parkinglot;
 
 import java.util.List;
 
-public class ParkingBoy {
+public abstract class ParkingBoy {
+	private String parkingBoyName;
+	protected List<ParkingLot> parkingLots; 
 	
-	public ParkingLot chooseParkingLot(List<ParkingLot> parkingLots) throws ParkingLotIsFullException {
-		return null;
+	public ParkingBoy(String parkingBoyName, List<ParkingLot> parkingLots) {
+		this.parkingBoyName = parkingBoyName;
+		this.parkingLots = parkingLots;
 	}
+
+	public String getParkingBoyName() {
+		return parkingBoyName;
+	}
+
+	public abstract ParkingLot chooseParkingLot(List<ParkingLot> parkingLots) throws ParkingLotIsFullException;
 	
-	public Ticket park(Car car, List<ParkingLot> parkingLots) throws ParkingLotIsFullException {
+	public Ticket park(Car car) throws ParkingLotIsFullException {
+		ParkingRecord parkingRecord = new ParkingRecord(parkingBoyName, car.getCarPlate());
 		ParkingLot parkingLot = chooseParkingLot(parkingLots);
+		ParkingReport.record(parkingRecord);
 		return parkingLot.park(car);
 	}
 	
-	public Car pick(Ticket ticket, List<ParkingLot> parkingLots) throws TheTicketIsValidException {
-		int theValidTicketFlag = -1;
-		for (int i = 0; i < parkingLots.size(); i++) {
-			ParkingLot parkingLot = parkingLots.get(i);
-			if (parkingLot.parkedCars.containsKey(ticket)) {
-				theValidTicketFlag = i;
-			} 
-		}
-		if (theValidTicketFlag < 0) {
-			throw new TheTicketIsValidException();
-		}else {
-			return parkingLots.get(theValidTicketFlag).pick(ticket);
-		}
+	public Car pick(Ticket ticket) throws TheTicketIsValidException {
+		return ticket.getOfParkingLot().pick(ticket);
 	}
 	
 }

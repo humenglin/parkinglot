@@ -4,6 +4,10 @@ import java.util.List;
 
 public class GraduateParkingBoy extends ParkingBoy {
 
+	public GraduateParkingBoy(String name, List<ParkingLot> parkingLots) {
+		super(name, parkingLots);
+	}
+
 	@Override
 	public ParkingLot chooseParkingLot(List<ParkingLot> parkingLots) throws ParkingLotIsFullException {
 		int theParkingLotIndex = -1;

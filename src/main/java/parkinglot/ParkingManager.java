@@ -6,7 +6,11 @@ import java.util.List;
 
 public class ParkingManager extends ParkingBoy {
 	
-	public ParkingBoy manageParkingBoy(List<ParkingBoy> parkingBoys) {
+	public ParkingManager(String parkingBoyName, List<ParkingLot> parkingLots) {
+		super(parkingBoyName, parkingLots);
+	}
+
+	public ParkingBoy findParkingBoyToPark(List<ParkingBoy> parkingBoys) {
 		int index = (int) (Math.random()*parkingBoys.size());
 		return parkingBoys.get(index);
 	}

@@ -6,6 +6,10 @@ import java.util.List;
 
 public class SuperParkingBoy extends ParkingBoy {
 
+	public SuperParkingBoy(String parkingBoyName, List<ParkingLot> parkingLots) {
+		super(parkingBoyName, parkingLots);
+	}
+
 	@Override
 	public ParkingLot chooseParkingLot(List<ParkingLot> parkingLots) throws ParkingLotIsFullException {
 		List<Double> vacancyRates = new ArrayList<Double>();
